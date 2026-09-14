@@ -1,0 +1,22 @@
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        minCount = 999999
+        left = 0
+        sum = 0
+        count = 0
+
+        for right in range(len(nums)):
+            sum += nums[right]
+            count += 1
+
+            while sum >= target:
+                minCount = min(minCount, count)
+                sum -= nums[left]
+                left += 1
+                count -= 1
+
+        if minCount == 999999:
+            return 0
+        else:
+            return minCount
+
